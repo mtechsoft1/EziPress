@@ -6,7 +6,6 @@ import 'package:efood_multivendor_restaurant/data/model/response/order_details_m
 import 'package:efood_multivendor_restaurant/data/model/response/order_model.dart';
 import 'package:efood_multivendor_restaurant/data/model/response/running_order_model.dart';
 import 'package:efood_multivendor_restaurant/data/repository/order_repo.dart';
-import 'package:efood_multivendor_restaurant/view/base/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

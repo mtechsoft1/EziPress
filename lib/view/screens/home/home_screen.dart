@@ -15,14 +15,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
-import '../pos/pos_print_screen.dart';
-
 class HomeScreen extends StatelessWidget {
 
   Future<void> _loadData() async {
     await Get.find<AuthController>().getProfile();
     await Get.find<OrderController>().getCurrentOrders();
     await Get.find<NotificationController>().getNotificationList();
+
   }
 
   @override
@@ -165,7 +164,28 @@ class HomeScreen extends StatelessWidget {
               }
 
               return Column(children: [
+                // Text("data"),
+                orderController.runningOrders != null ? Container(
+                  height: 40,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Theme.of(context).disabledColor, width: 1),
+                    borderRadius: BorderRadius.circular(Dimensions.RADIUS_SMALL),
+                  ),
+                  child: ListView.builder(
 
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 4,
+                    itemBuilder: (context, index) {
+                      List nameList=['DineIn','Reservation','Delivery','TakeAway'];
+                      return (false)?Text("data"):
+                        OrderButton(
+                        title: nameList[index], index: index,
+                        orderController: orderController, fromHistory: false,
+                      );
+                    },
+                  ),
+                ) : SizedBox(),
+                SizedBox(height: Dimensions.FONT_SIZE_DEFAULT,),
                 orderController.runningOrders != null ? Container(
                   height: 40,
                   decoration: BoxDecoration(

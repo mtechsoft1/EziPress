@@ -12,7 +12,9 @@ import 'package:efood_multivendor_restaurant/controller/pos_controller.dart';
 import 'package:efood_multivendor_restaurant/controller/restaurant_controller.dart';
 import 'package:efood_multivendor_restaurant/controller/splash_controller.dart';
 import 'package:efood_multivendor_restaurant/controller/theme_controller.dart';
+import 'package:efood_multivendor_restaurant/data/api/api_client.dart';
 import 'package:efood_multivendor_restaurant/data/model/response/bank_repo.dart';
+import 'package:efood_multivendor_restaurant/data/model/response/language_model.dart';
 import 'package:efood_multivendor_restaurant/data/repository/addon_repo.dart';
 import 'package:efood_multivendor_restaurant/data/repository/auth_repo.dart';
 import 'package:efood_multivendor_restaurant/data/repository/campaign_repo.dart';
@@ -23,12 +25,10 @@ import 'package:efood_multivendor_restaurant/data/repository/order_repo.dart';
 import 'package:efood_multivendor_restaurant/data/repository/pos_repo.dart';
 import 'package:efood_multivendor_restaurant/data/repository/restaurant_repo.dart';
 import 'package:efood_multivendor_restaurant/data/repository/splash_repo.dart';
-import 'package:efood_multivendor_restaurant/data/api/api_client.dart';
 import 'package:efood_multivendor_restaurant/util/app_constants.dart';
-import 'package:efood_multivendor_restaurant/data/model/response/language_model.dart';
 import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<Map<String, Map<String, String>>> init() async {
   // Core

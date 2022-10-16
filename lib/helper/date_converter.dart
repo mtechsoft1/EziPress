@@ -1,6 +1,6 @@
 import 'package:efood_multivendor_restaurant/controller/splash_controller.dart';
-import 'package:intl/intl.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class DateConverter {
 

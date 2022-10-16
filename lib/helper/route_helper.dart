@@ -20,7 +20,6 @@ import 'package:efood_multivendor_restaurant/view/screens/deliveryman/delivery_m
 import 'package:efood_multivendor_restaurant/view/screens/deliveryman/delivery_man_screen.dart';
 import 'package:efood_multivendor_restaurant/view/screens/forget/forget_pass_screen.dart';
 import 'package:efood_multivendor_restaurant/view/screens/forget/new_pass_screen.dart';
-import 'package:efood_multivendor_restaurant/view/screens/forget/verification_screen.dart';
 import 'package:efood_multivendor_restaurant/view/screens/html/html_viewer_screen.dart';
 import 'package:efood_multivendor_restaurant/view/screens/language/language_screen.dart';
 import 'package:efood_multivendor_restaurant/view/screens/notification/notification_screen.dart';

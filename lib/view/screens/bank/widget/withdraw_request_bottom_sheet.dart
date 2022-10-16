@@ -7,8 +7,8 @@ import 'package:efood_multivendor_restaurant/util/styles.dart';
 import 'package:efood_multivendor_restaurant/view/base/custom_button.dart';
 import 'package:efood_multivendor_restaurant/view/base/custom_snackbar.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 class WithdrawRequestBottomSheet extends StatelessWidget {
   @override

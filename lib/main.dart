@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+
 import 'package:efood_multivendor_restaurant/controller/localization_controller.dart';
 import 'package:efood_multivendor_restaurant/controller/theme_controller.dart';
 import 'package:efood_multivendor_restaurant/helper/notification_helper.dart';
@@ -15,6 +16,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:url_strategy/url_strategy.dart';
+
 import 'helper/get_di.dart' as di;
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();

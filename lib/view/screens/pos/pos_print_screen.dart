@@ -1,6 +1,5 @@
 import 'package:bluetooth_thermal_printer/bluetooth_thermal_printer.dart';
 import 'package:efood_multivendor_restaurant/util/app_constants.dart';
-import 'package:esc_pos_printer/esc_pos_printer.dart';
 import 'package:esc_pos_utils/esc_pos_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,7 +11,6 @@ import '../../../data/model/response/order_model.dart';
 import '../../../data/model/response/product_model.dart';
 import '../../../helper/price_converter.dart';
 import '../../base/custom_snackbar.dart';
-import 'package:esc_pos_printer/esc_pos_printer.dart';
 
 class PosPrintScreen extends StatefulWidget {
   final OrderModel order;

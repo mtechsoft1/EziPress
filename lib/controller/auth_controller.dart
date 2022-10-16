@@ -6,8 +6,8 @@ import 'package:efood_multivendor_restaurant/helper/route_helper.dart';
 import 'package:efood_multivendor_restaurant/view/base/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 
 class AuthController extends GetxController implements GetxService {
   final AuthRepo authRepo;

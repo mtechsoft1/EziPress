@@ -1,18 +1,18 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
+
 import 'package:efood_multivendor_restaurant/data/api/api_client.dart';
 import 'package:efood_multivendor_restaurant/data/model/response/profile_model.dart';
 import 'package:efood_multivendor_restaurant/util/app_constants.dart';
-import 'package:path/path.dart';
-import 'package:http_parser/http_parser.dart';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepo {
   final ApiClient apiClient;

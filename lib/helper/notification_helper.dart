@@ -1,11 +1,11 @@
 import 'dart:io';
 
+import 'package:efood_multivendor_restaurant/util/app_constants.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:efood_multivendor_restaurant/util/app_constants.dart';
 import 'package:get/get.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:path_provider/path_provider.dart';
 
 class NotificationHelper {
 

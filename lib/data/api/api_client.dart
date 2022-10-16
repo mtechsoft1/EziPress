@@ -1,17 +1,17 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:http_parser/http_parser.dart';
 
 import 'package:efood_multivendor_restaurant/data/model/response/error_response.dart';
 import 'package:efood_multivendor_restaurant/util/app_constants.dart';
+import 'package:flutter/foundation.dart' as Foundation;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:path/path.dart';
-import 'package:flutter/foundation.dart' as Foundation;
 import 'package:http/http.dart' as Http;
+import 'package:http_parser/http_parser.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiClient extends GetxService {
   final String appBaseUrl;
