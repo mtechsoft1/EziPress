@@ -26,7 +26,7 @@ class OrderButton extends StatelessWidget {
     }
     bool isSelected = _selectedIndex == index;
     return InkWell(
-      // onTap: () => fromHistory ? orderController.setHistoryIndex(index) : orderController.setOrderIndex(index),
+      onTap: () => fromHistory ? orderController.setHistoryIndex(index) : orderController.setOrderIndex(index),
       child: Row(children: [
 
         Container(
