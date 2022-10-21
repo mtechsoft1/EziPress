@@ -11,11 +11,14 @@ import 'package:efood_multivendor_restaurant/view/base/confirmation_dialog.dart'
 import 'package:efood_multivendor_restaurant/view/base/order_shimmer.dart';
 import 'package:efood_multivendor_restaurant/view/base/order_widget.dart';
 import 'package:efood_multivendor_restaurant/view/screens/home/widget/order_button.dart';
+import 'package:efood_multivendor_restaurant/view/screens/home/widget/ordertype_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
 class HomeScreen extends StatelessWidget {
+
+
 
   Future<void> _loadData() async {
     await Get.find<AuthController>().getProfile();
@@ -27,6 +30,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _loadData();
+
 
     return Scaffold(
 
@@ -159,10 +163,18 @@ class HomeScreen extends StatelessWidget {
 
             GetBuilder<OrderController>(builder: (orderController) {
               List<OrderModel> _orderList = [];
+              var dineIn;
+
               if(orderController.runningOrders != null) {
                 _orderList = orderController.runningOrders[orderController.orderIndex].orderList;
+                // for(var i; i<32;i++){
+                //   if(_orderList[i].orderType=="reservation"){
+                //     dineIn++;
+                //   }
+                // }
               }
 
+              print("==dineIn:$dineIn=====");
               return Column(children: [
                 // Text("data"),
                 orderController.runningOrders != null ? Container(
@@ -172,14 +184,12 @@ class HomeScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(Dimensions.RADIUS_SMALL),
                   ),
                   child: ListView.builder(
-
                     scrollDirection: Axis.horizontal,
                     itemCount: 4,
-                    itemBuilder: (context, index) {
+                    itemBuilder: (context, i) {
                       List nameList=['DineIn','Reservation','Delivery','TakeAway'];
-                      return (false)?Text("data"):
-                        OrderButton(
-                        title: nameList[index], index: index,
+                      return OrderTypeButton(
+                        title: nameList[i], index: i,
                         orderController: orderController, fromHistory: false,
                       );
                     },
@@ -225,7 +235,10 @@ class HomeScreen extends StatelessWidget {
                   shrinkWrap: true,
                   itemCount: _orderList.length,
                   itemBuilder: (context, index) {
-                    return OrderWidget(orderModel: _orderList[index], hasDivider: index != _orderList.length-1, isRunning: true);
+                    // int dineIn;
+                    // if(_orderList[index].orderType!="reservation"&&_orderList[index].orderType!="dinin")
+                    return
+                    OrderWidget(orderModel: _orderList[index], hasDivider: index != _orderList.length-1, isRunning: true);
                   },
                 ) : Padding(
                   padding: EdgeInsets.only(top: 50),

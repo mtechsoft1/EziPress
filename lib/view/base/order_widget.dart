@@ -16,6 +16,8 @@ class OrderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("====:orderModel.orderType:${orderModel.orderType}=======");
+
     return InkWell(
       onTap: () => Get.toNamed(RouteHelper.getOrderDetailsRoute(orderModel.id), arguments: OrderDetailsScreen(
         orderModel: orderModel, isRunningOrder: isRunning,
