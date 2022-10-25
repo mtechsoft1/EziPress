@@ -400,19 +400,32 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           // Get.to(()=>PosPrintScreen());
                           Get.find<AuthController>().getProfile();
                           Get.find<OrderController>().getCurrentOrders();
-                          Get.dialog(PrintDialog(
-                            title: "Print",
-                            description: 'Select Printer Type',
-                            onWifiPrinter: (){
-                              print("====onWifiPrinter====");
-                              Get.back();
-                              // Get.to(()=>PosPrintScreen());
-                              // Get.to(()=>PosWifiPrintScreen());
-                            },onBluetooth: (){
-                            print("====onBluetooth====");
+                          Get.dialog(InputDialog(
+                            icon: Images.warning,
+                            title: 'are_you_sure_to_confirm'.tr,
+                            description: 'enter_processing_time_in_minutes'.tr, onPressed: (String time){
                             Get.back();
-                            // Get.to(()=>PosWifiPrintScreen());
-                            // Get.to(()=>PosPrintScreen());
+                            Get.find<OrderController>().updateOrderStatus(_controllerOrderModer.id, 'processing', processingTime: time).then((success) {
+                              if(success) {
+                                Get.find<AuthController>().getProfile();
+                                Get.find<OrderController>().getCurrentOrders();
+                                Get.dialog(PrintDialog(
+                                  title: "Print",
+                                  description: 'Select Printer Type',
+                                  onWifiPrinter: (){
+                                    print("====onWifiPrinter====");
+                                    Get.back();
+                                    // Get.to(()=>PosPrintScreen());
+                                    // Get.to(()=>PosWifiPrintScreen());
+                                  },onBluetooth: (){
+                                  print("====onBluetooth====");
+                                  Get.back();
+                                  // Get.to(()=>PosWifiPrintScreen());
+                                  // Get.to(()=>PosPrintScreen());
+                                },
+                                ));
+                              }
+                            });
                           },
                           ),barrierDismissible: false);
                           // Get.to(()=>PosScreen());
@@ -435,21 +448,50 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       if(success) {
                         Get.find<AuthController>().getProfile();
                         Get.find<OrderController>().getCurrentOrders();
-                        Get.dialog(PrintDialog(
-                          title: "Print",
-                          description: 'Select Printer Type',
-                          onWifiPrinter: (){
-                            print("====onWifiPrinter====");
-                            Get.back();
-                            // Get.to(()=>PosPrintScreen());
-                            // Get.to(()=>PosWifiPrintScreen());
-                          },onBluetooth: (){
-                          print("====onBluetooth====");
+                        Get.dialog(InputDialog(
+                          icon: Images.warning,
+                          title: 'are_you_sure_to_confirm'.tr,
+                          description: 'enter_processing_time_in_minutes'.tr, onPressed: (String time){
                           Get.back();
-                          // Get.to(()=>PosWifiPrintScreen());
-                          // Get.to(()=>PosPrintScreen());
+                          Get.find<OrderController>().updateOrderStatus(_controllerOrderModer.id, 'processing', processingTime: time).then((success) {
+                            if(success) {
+                              Get.find<AuthController>().getProfile();
+                              Get.find<OrderController>().getCurrentOrders();
+                              Get.dialog(PrintDialog(
+                                title: "Print",
+                                description: 'Select Printer Type',
+                                onWifiPrinter: (){
+                                  print("====onWifiPrinter====");
+                                  Get.back();
+                                  // Get.to(()=>PosPrintScreen());
+                                  // Get.to(()=>PosWifiPrintScreen());
+                                },onBluetooth: (){
+                                print("====onBluetooth====");
+                                Get.back();
+                                // Get.to(()=>PosWifiPrintScreen());
+                                // Get.to(()=>PosPrintScreen());
+                              },
+                              ));
+                            }
+                          });
                         },
-                        ),barrierDismissible: false);
+                        ),
+                        // Get.dialog(PrintDialog(
+                        //   title: "Print",
+                        //   description: 'Select Printer Type',
+                        //   onWifiPrinter: (){
+                        //     print("====onWifiPrinter====");
+                        //     Get.back();
+                        //     // Get.to(()=>PosPrintScreen());
+                        //     // Get.to(()=>PosWifiPrintScreen());
+                        //   },onBluetooth: (){
+                        //   print("====onBluetooth====");
+                        //   Get.back();
+                        //   // Get.to(()=>PosWifiPrintScreen());
+                        //   // Get.to(()=>PosPrintScreen());
+                        // },
+                        // ),
+                            barrierDismissible: false);
                       }
                     });
                   },
