@@ -177,25 +177,25 @@ class HomeScreen extends StatelessWidget {
               print("==dineIn:$dineIn=====");
               return Column(children: [
                 // Text("data"),
-                orderController.runningOrders != null ? Container(
-                  height: 40,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Theme.of(context).disabledColor, width: 1),
-                    borderRadius: BorderRadius.circular(Dimensions.RADIUS_SMALL),
-                  ),
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 4,
-                    itemBuilder: (context, i) {
-                      List nameList=['DineIn','Reservation','Delivery','TakeAway'];
-                      return OrderTypeButton(
-                        title: nameList[i], index: i,
-                        orderController: orderController, fromHistory: false,
-                      );
-                    },
-                  ),
-                ) : SizedBox(),
-                SizedBox(height: Dimensions.FONT_SIZE_DEFAULT,),
+                // orderController.runningOrders != null ? Container(
+                //   height: 40,
+                //   decoration: BoxDecoration(
+                //     border: Border.all(color: Theme.of(context).disabledColor, width: 1),
+                //     borderRadius: BorderRadius.circular(Dimensions.RADIUS_SMALL),
+                //   ),
+                //   child:(false)? ListView.builder(
+                //     scrollDirection: Axis.horizontal,
+                //     itemCount: 4,
+                //     itemBuilder: (context, i) {
+                //       List nameList=['DineIn','Reservation','Delivery','TakeAway'];
+                //       return OrderTypeButton(
+                //         title: nameList[i], index: i,
+                //         orderController: orderController, fromHistory: false,
+                //       );
+                //     },
+                //   ):Container(),
+                // ) : SizedBox(),
+                // SizedBox(height: Dimensions.FONT_SIZE_DEFAULT,),
                 orderController.runningOrders != null ? Container(
                   height: 40,
                   decoration: BoxDecoration(
