@@ -26,12 +26,11 @@ class HomeScreen extends StatelessWidget {
     await Get.find<NotificationController>().getNotificationList();
 
   }
-
+RxInt tabIndex=0.obs;
+  RxBool isSelect=false.obs;
   @override
   Widget build(BuildContext context) {
     _loadData();
-
-
     return Scaffold(
 
       appBar: AppBar(
@@ -160,100 +159,147 @@ class HomeScreen extends StatelessWidget {
               ]);
             }),
             SizedBox(height: Dimensions.PADDING_SIZE_LARGE),
-
             GetBuilder<OrderController>(builder: (orderController) {
               List<OrderModel> _orderList = [];
+              List<OrderModel> _dineInOderList = [];
               var dineIn;
-
               if(orderController.runningOrders != null) {
                 _orderList = orderController.runningOrders[orderController.orderIndex].orderList;
-                // for(var i; i<32;i++){
-                //   if(_orderList[i].orderType=="reservation"){
-                //     dineIn++;
-                //   }
-                // }
+                print("==length:${_orderList.length}========");
+                // if()
               }
 
               print("==dineIn:$dineIn=====");
               return Column(children: [
                 // Text("data"),
-                // orderController.runningOrders != null ? Container(
-                //   height: 40,
-                //   decoration: BoxDecoration(
-                //     border: Border.all(color: Theme.of(context).disabledColor, width: 1),
-                //     borderRadius: BorderRadius.circular(Dimensions.RADIUS_SMALL),
-                //   ),
-                //   child:(false)? ListView.builder(
-                //     scrollDirection: Axis.horizontal,
-                //     itemCount: 4,
-                //     itemBuilder: (context, i) {
-                //       List nameList=['DineIn','Reservation','Delivery','TakeAway'];
-                //       return OrderTypeButton(
-                //         title: nameList[i], index: i,
-                //         orderController: orderController, fromHistory: false,
-                //       );
-                //     },
-                //   ):Container(),
-                // ) : SizedBox(),
-                // SizedBox(height: Dimensions.FONT_SIZE_DEFAULT,),
                 orderController.runningOrders != null ? Container(
-                  height: 40,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Theme.of(context).disabledColor, width: 1),
-                    borderRadius: BorderRadius.circular(Dimensions.RADIUS_SMALL),
-                  ),
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: orderController.runningOrders.length,
-                    itemBuilder: (context, index) {
-                      return OrderButton(
-                        title: orderController.runningOrders[index].status.tr, index: index,
-                        orderController: orderController, fromHistory: false,
-                      );
-                    },
-                  ),
-                ) : SizedBox(),
-
-                orderController.runningOrders != null ? InkWell(
-                  onTap: () => orderController.toggleCampaignOnly(),
-                  child: Row(children: [
-                    Checkbox(
-                      activeColor: Theme.of(context).primaryColor,
-                      value: orderController.campaignOnly,
-                      onChanged: (isActive) => orderController.toggleCampaignOnly(),
+                    height: 40,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Theme.of(context).disabledColor, width: 1),
+                      borderRadius: BorderRadius.circular(Dimensions.RADIUS_SMALL),
                     ),
-                    Text(
-                      'campaign_order'.tr,
-                      style: robotoRegular.copyWith(fontSize: Dimensions.FONT_SIZE_SMALL, color: Theme.of(context).disabledColor),
-                    ),
-                  ]),
-                ) : SizedBox(),
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 3,
+                      itemBuilder: (context, i) {
+                        List nameList=['Delivery','DineIn','Reservation'];
+                        return  Obx((){
+                          return InkWell(
+                            onTap: (){
+                              tabIndex.value=i;
+                              isSelect.value=true;
 
-                orderController.runningOrders != null ? _orderList.length > 0 ?
-                ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: _orderList.length,
-                  itemBuilder: (context, index) {
-                    // int dineIn;
-                    // if(_orderList[index].orderType!="reservation"&&_orderList[index].orderType!="dinin")
-                    return
-                    OrderWidget(orderModel: _orderList[index], hasDivider: index != _orderList.length-1, isRunning: true);
-                  },
-                ) : Padding(
-                  padding: EdgeInsets.only(top: 50),
-                  child: Center(child: Text('no_order_found'.tr)),
-                ) : ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return OrderShimmer(isEnabled: orderController.runningOrders == null);
-                  },
-                ),
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_DEFAULT),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(Dimensions.RADIUS_SMALL),
+                                // color:  Theme.of(context).cardColor,
+                                color: (tabIndex.value==i)? Theme.of(context).primaryColor : Theme.of(context).cardColor,
+                              ),
+                              alignment: Alignment.center,
+                              child: Text(
+                                '${nameList[i]}',
+                                maxLines: 1, overflow: TextOverflow.ellipsis,
+                                style: robotoMedium.copyWith(
+                                  fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL,
+                                  // color: Theme.of(context).textTheme.bodyText1.color,
+                                  color:(tabIndex.value==i)?Theme.of(context).cardColor : Theme.of(context).textTheme.bodyText1.color,
+                                ),
+                              ),
+                            ),
+                          );
+                        });
+                        //   OrderTypeButton(
+                        //   title: nameList[i], index: i,
+                        //   orderController: orderController, fromHistory: false,
+                        // );
+                      },
+                    )
+                ) : SizedBox(),
+                SizedBox(height: Dimensions.FONT_SIZE_DEFAULT,),
+                Obx((){
+                  if(tabIndex.value==0&&orderController.runningOrders != null){
+                    return Column(
+                      children: [
+                        Container(
+                          height: 40,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Theme.of(context).disabledColor, width: 1),
+                            borderRadius: BorderRadius.circular(Dimensions.RADIUS_SMALL),
+                          ),
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: orderController.runningOrders.length,
+                            itemBuilder: (context, index) {
+                              return OrderButton(
+                                title: orderController.runningOrders[index].status.tr, index: index,
+                                orderController: orderController, fromHistory: false,
+                              );
+                            },
+                          ),
+                        ),
+                        orderController.runningOrders != null ? InkWell(
+                          onTap: () => orderController.toggleCampaignOnly(),
+                          child: Row(children: [
+                            Checkbox(
+                              activeColor: Theme.of(context).primaryColor,
+                              value: orderController.campaignOnly,
+                              onChanged: (isActive) => orderController.toggleCampaignOnly(),
+                            ),
+                            Text(
+                              'campaign_order'.tr,
+                              style: robotoRegular.copyWith(fontSize: Dimensions.FONT_SIZE_SMALL, color: Theme.of(context).disabledColor),
+                            ),
+                          ]),
+                        ) : SizedBox(),
+                      ],
+                    ) ;
+                  }else{
+                    return  SizedBox();
+                  }
+                }),
+
+                Obx(() {
+                  if( tabIndex.value==0){
+                    return orderController.runningOrders != null ? _orderList.length > 0 ?
+                    ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: _orderList.length,
+                      itemBuilder: (context, index) {
+                        // int dineIn;
+                        if(_orderList[index].orderType!="reservation"&&_orderList[index].orderType!="dinin")
+                        return
+                          OrderWidget(orderModel: _orderList[index], hasDivider: index != _orderList.length-1, isRunning: true);
+                      },
+                    ) : Padding(
+                      padding: EdgeInsets.only(top: 50),
+                      child: Center(child: Text('no_order_found'.tr)),
+                    ) : ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: 10,
+                      itemBuilder: (context, index) {
+                        return OrderShimmer(isEnabled: orderController.runningOrders == null);
+                      },
+                    );
+                  }else if(tabIndex.value==1){
+                    return Container(child: Text("DineIn"));
+                  }else{
+                    return Container(child: Text("Reservation"));
+                  }
+
+                }),
+
+
 
               ]);
             }),
+
+            // Obx(() {
+            //   return ;
+            // })
           ]),
         ),
       ),
