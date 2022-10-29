@@ -17,6 +17,7 @@ class OrderController extends GetxController implements GetxService {
   List<OrderModel> _orderList;
   List<OrderModel> _runningOrderList;
   List<RunningOrderModel> _runningOrders;
+  List<RunningOrderModel> _runningDineInOrders;
   List<OrderModel> _historyOrderList;
   List<OrderDetailsModel> _orderDetailsModel;
   bool _isLoading = false;
@@ -74,6 +75,7 @@ class OrderController extends GetxController implements GetxService {
         OrderModel _orderModel = OrderModel.fromJson(order);
         _allOrderList.add(_orderModel);
         _orderList.add(_orderModel);
+        print("==================");
       });
     }else {
       ApiChecker.checkApi(response);
@@ -84,9 +86,20 @@ class OrderController extends GetxController implements GetxService {
   Future<void> getCurrentOrders() async {
     Response response = await orderRepo.getCurrentOrders();
     if(response.statusCode == 200) {
+      print("===Response Time:${response.body[0]["order_type"].toString()}===========");
       _runningOrderList = [];
+
       _runningOrders = [
         RunningOrderModel(status: 'pending', orderList: []),
+        // RunningOrderModel(status: 'pending', orderList: []),
+        RunningOrderModel(status: 'confirmed', orderList: []),
+        RunningOrderModel(status: 'cooking', orderList: []),
+        RunningOrderModel(status: 'ready_for_handover', orderList: []),
+        RunningOrderModel(status: 'food_on_the_way', orderList: []),
+      ];
+      _runningDineInOrders= [
+        RunningOrderModel(status: 'pending', orderList: []),
+        // RunningOrderModel(status: 'pending', orderList: []),
         RunningOrderModel(status: 'confirmed', orderList: []),
         RunningOrderModel(status: 'cooking', orderList: []),
         RunningOrderModel(status: 'ready_for_handover', orderList: []),
@@ -96,6 +109,7 @@ class OrderController extends GetxController implements GetxService {
         OrderModel _orderModel = OrderModel.fromJson(order);
         _runningOrderList.add(_orderModel);
       });
+      // print("===Response Time:${response.body}===========");
       _campaignOnly = true;
       toggleCampaignOnly();
     }else {

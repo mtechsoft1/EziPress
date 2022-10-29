@@ -11,7 +11,6 @@ import 'package:efood_multivendor_restaurant/view/base/confirmation_dialog.dart'
 import 'package:efood_multivendor_restaurant/view/base/order_shimmer.dart';
 import 'package:efood_multivendor_restaurant/view/base/order_widget.dart';
 import 'package:efood_multivendor_restaurant/view/screens/home/widget/order_button.dart';
-import 'package:efood_multivendor_restaurant/view/screens/home/widget/ordertype_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
@@ -159,20 +158,21 @@ RxInt tabIndex=0.obs;
               ]);
             }),
             SizedBox(height: Dimensions.PADDING_SIZE_LARGE),
-            GetBuilder<OrderController>(builder: (orderController) {
+            GetBuilder<OrderController>(builder: (orderController){
               List<OrderModel> _orderList = [];
-              List<OrderModel> _dineInOderList = [];
-              var dineIn;
               if(orderController.runningOrders != null) {
+                print("====_orderList.length:${_orderList.length}===");
                 _orderList = orderController.runningOrders[orderController.orderIndex].orderList;
-                print("==length:${_orderList.length}========");
-                // if()
               }
 
-              print("==dineIn:$dineIn=====");
+                // _dineInOderList= _orderList.forEach((element.(element) =>element.orderType=="delivery" );
+
+
+              // print("==dineIn:$dineIn=====");
               return Column(children: [
                 // Text("data"),
-                orderController.runningOrders != null ? Container(
+                orderController.runningOrders != null ?
+                Container(
                     height: 40,
                     decoration: BoxDecoration(
                       border: Border.all(color: Theme.of(context).disabledColor, width: 1),
@@ -262,6 +262,7 @@ RxInt tabIndex=0.obs;
 
                 Obx(() {
                   if( tabIndex.value==0){
+                    print("====_orderList.length:${_orderList.length}===");
                     return orderController.runningOrders != null ? _orderList.length > 0 ?
                     ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
@@ -269,9 +270,8 @@ RxInt tabIndex=0.obs;
                       itemCount: _orderList.length,
                       itemBuilder: (context, index) {
                         // int dineIn;
-                        if(_orderList[index].orderType!="reservation"&&_orderList[index].orderType!="dinin")
-                        return
-                          OrderWidget(orderModel: _orderList[index], hasDivider: index != _orderList.length-1, isRunning: true);
+
+                        return (_orderList[index].orderType=="delivery")?OrderWidget(orderModel: _orderList[index], hasDivider: index != _orderList.length-1, isRunning: true):Container();
                       },
                     ) : Padding(
                       padding: EdgeInsets.only(top: 50),
@@ -285,15 +285,53 @@ RxInt tabIndex=0.obs;
                       },
                     );
                   }else if(tabIndex.value==1){
-                    return Container(child: Text("DineIn"));
+                    return orderController.runningOrders != null ? _orderList.length > 0 ?
+                    ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: _orderList.length,
+                      itemBuilder: (context, index) {
+                        // int dineIn;
+                          return (_orderList[index].orderType=="dinin")?OrderWidget(orderModel: _orderList[index], hasDivider: index != _orderList.length-1, isRunning: true):Container();
+                      },
+                    ) :
+                    Padding(
+                      padding: EdgeInsets.only(top: 50),
+                      child: Center(child: Text('no_order_found'.tr)),
+                    ) : ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: 10,
+                      itemBuilder: (context, index) {
+                        return OrderShimmer(isEnabled: orderController.runningOrders == null);
+                      },
+                    );
+                    // if( _orderList.where((element) => element.orderType=="delivery"))
+                    // return Container(child: Text("DineIn"));
                   }else{
-                    return Container(child: Text("Reservation"));
+                    return orderController.runningOrders != null ? _orderList.length > 0 ?
+                    ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: _orderList.length,
+                      itemBuilder: (context, index) {
+                        // int dineIn;
+                        return (_orderList[index].orderType=="reservation")?OrderWidget(orderModel: _orderList[index], hasDivider: index != _orderList.length-1, isRunning: true):Container();
+                      },
+                    ) :
+                    Padding(
+                      padding: EdgeInsets.only(top: 50),
+                      child: Center(child: Text('no_order_found'.tr)),
+                    ) : ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: 10,
+                      itemBuilder: (context, index) {
+                        return OrderShimmer(isEnabled: orderController.runningOrders == null);
+                      },
+                    );
                   }
-
                 }),
-
-
-
               ]);
             }),
 
