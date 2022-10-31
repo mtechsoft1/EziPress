@@ -37,13 +37,14 @@ class OrderDetailsScreen extends StatefulWidget {
 
 class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   Timer _timer;
-
+  OrderController orderController=OrderController();
   @override
   void initState() {
     print("=========OrderDetailsScreen===========");
     super.initState();
     Get.find<OrderController>().setOrderDetails(widget.orderModel);
     Get.find<OrderController>().getOrderDetails(Get.find<OrderController>().orderModel.id);
+    // print("====cart:${orderController.orderDetailsModel[0].id}============");
 
     _timer = Timer.periodic(Duration(seconds: 10), (timer) {
       Get.find<OrderController>().getOrderWithId(Get.find<OrderController>().orderModel.id);
